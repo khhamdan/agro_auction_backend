@@ -1,0 +1,44 @@
+TO get who bidded on a product using auctionId
+http://localhost:8000/api/users/getBidHistory/81
+
+//
+to get reviews + rating on a product using productId
+http://localhost:8000/api/users/getReviews/8
+
+//
+to add review: note can only review after buying
+method post
+localhost:8000/api/users/addReview
+Payload in JSON
+{
+    "productId": 5 ,
+    "auctionId": 5,
+    "userId":2,
+    "rating": "4.1",
+    "feedback": "Good"
+}
+
+//
+update product info, only details not image
+Method POST
+localhost:8000/api/users/updateProductInfo
+payload in JSON
+{   
+"tilte": "new title",
+"description":"updated desc",
+"rate":"1400",
+"weight":3,
+"weighttype":"wahteaf",
+"count":6,
+"counttype":"sdsd",
+"volume":6,
+"volumetype":"sdsd",
+"userId":25,
+"location":"new",
+"productid":19
+}
+
+
+//
+get sold products using farmer userId
+http://localhost:8000/api/users/soldProductsByFarmer/22

@@ -1,0 +1,241 @@
+BaseUrl for Profile pic
+http://localhost:8000/assets/profilePicture/nameFromDB
+
+
+BaseUrl for products pic
+http://localhost:8000/assets/products/nameFromDB
+
+
+signUp
+
+localhost:8000/api/users/singUp
+
+payload
+{
+    "username":"asadaa",
+    "email":"asad@gmail.com",
+    "password":"test123",
+    "role": "User"
+}
+
+login
+Post request
+localhost:8000/api/users/login
+payload
+{
+    "email": "asad@gmail.com",
+    "password":"test123"
+}
+
+check Session
+localhost:8000/api/users/checkSession
+set Header Authorization and uses Bearer + token From Login
+
+you will details of logged in user, if not then force user to login again
+
+
+Add Product
+localhost:8000/api/users/addProduct
+method post
+payload
+
+{
+"title":"test",
+"description":"tsting",
+"rate":"1000",
+"quantity":"20",
+"userId":"1"
+}
+
+
+Get All Products
+
+localhost:8000/api/users/getAllProducts
+
+Get Single Product
+GET Req
+PAram = id
+localhost:8000/api/users/getSingleProduct/:id 
+
+
+List on Auction
+
+localhost:8000/api/users/listOnAuction
+Method  post
+payload
+
+{
+    "userId":"1",
+    "productId":"3",
+    "reservePrice":"10",
+    "quantity":"20"
+  
+}
+
+Add Bidd
+
+localhost:8000/api/users/addBid
+Method  post
+payload
+
+{
+    "userId":"2",
+    "productId":"3",
+    "price":"500",
+      "endTime" : "123124",
+      "auctionId": 2
+}
+
+update user profile
+method post 
+payload 
+    {
+    "description":"this is a test",
+    "cnic":"712124-232-2",
+    "location":"amphary",
+    "email":"test@gmail.com",
+    "userId": "3"
+}
+
+get single user 
+GET Req
+PAram = id
+http://localhost:8000/api/users/getSingleUser/:id
+
+
+delete user
+GET Req
+PAram = userId
+http://localhost:8000/api/users/deleteUser/:userId
+
+
+delete product
+GET Req
+PAram = productId
+http://localhost:8000/api/users/deleteProduct/:productId
+
+search product
+method get
+query param = title 
+eg below
+http://localhost:8000/api/users/searchProduct?title=test
+
+get All users
+
+http://localhost:8000/api/users/getAllUsers
+
+
+upload profile pic
+Method Post
+localhost:8000/api/users/uploadProfilePic
+form data
+userId, file
+
+user created products
+method get
+param = userId
+eg
+http://localhost:8000/api/users/createdProducts/:userId
+
+Settle Auction
+
+Method post
+
+payload
+
+{
+    "productId": "3" ,
+    "auctionId": "2",
+    "reserveQuantity":"20"
+}
+
+localhost:8000/api/users/settleAuction
+
+
+
+NEW APIS
+//CANCEL AUCTION: NOTE FARMER CAN ONLY CANCEL/UPDATE LISTING, BEFORE ANY BIDDING IS PLACED.
+localhost:8000/api/users/cancelAuction
+METHOD: POST
+PAYLOAD:
+{
+    "productId":5,
+    "auctionId":4
+}
+
+// UPDATE AUCITON DETAILS i-e  QUANTITY AND RESERVEPRICE
+localhost:8000/api/users/updateAuctionDetails
+method: post
+payload
+{
+    "productId":5,
+    "auctionId":5,
+    "reservePrice": 600,
+    "quantity": "150"
+}
+
+AFTER AUCTION SETTLE, In the user profile show the products He/She bought using the api below, and
+check if is the amount is paid or not, if amount is not paid then show Pay button and redirect to payment page.
+if amount is paid enable user to give a review about the product they bought. I have returned all the necessary
+info in the api below
+
+localhost:8000/api/users/boughtProducts/:userId   : jis user ki id pass kro gey usky against check hoge either they won auction or not
+Card number must be "4242424242424242", CVC any 3 digits and exp_month and year from future, if success, it will generate a URL which shows all the details of payment
+NOTE: stripe converts PKR to USD so, if the total amount is suppose 500, make it 50000, it will automatically be 500 when charged, add two extra zeros (00) at the end
+of amount
+CheckOut
+localhost:8000/api/users/checkOut
+Method POST
+{
+    "amount": 50000,
+     "currency":"PKR",
+     "description": "Whateever",
+     "name": "asad",
+      "card": {
+        "number": "4242424242424242",
+        "exp_month": 11,
+        "exp_year": 2025,
+        "cvc": "123"
+    },
+    "productId": 5,
+    "auctionId": 5,
+    "userId": 2
+    
+}
+
+
+
+ADD REVIEW
+localhost:8000/api/users/addReview
+Method Post
+payload
+{
+    "productId": 5 ,
+    "auctionId": 5,
+    "userId":2,
+    "rating": "4.2",
+    "feedback": "Good"
+}
+
+GET REVIEWS ON A PRODUCT
+Method Get, it will return all the reviews on the product
+localhost:8000/api/users/getReviews/:productId
+
+
+Sent Message to any user on platform
+Method: post
+localhost:8000/api/users/sendMessage
+payload
+{
+    "sender_id": 3 ,
+    "reciever_id": 2,
+    "message":"Hi Fayz .."
+}
+
+Get messeges bw two user
+localhost:8000/api/users/getChat/sendBy/receiveBy
+replace send by and receive by, with user ids
+
+//update msg status by messageId whenever user click on that msg or chat
+localhost:8000/api/users/updateMsgStatus/:messageId
+replace messageId with value from get messages
